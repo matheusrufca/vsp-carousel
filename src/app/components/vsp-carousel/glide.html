@@ -8,7 +8,13 @@
       <li class="slide-item glide__slide" ng-repeat="x in slideData">
         <img ng-src="{{x.thumbUrl}}" class="slide-bg--small" />
         <img ng-src="{{x.imageUrl}}" class="slide-bg--large" />
-        <div class="slide-bottom-info">
+
+
+        <a class="slide-item__btn-play" href="#">
+          <i class="glyphicon glyphicon-play"></i>
+        </a>
+
+        <div class="slide-info--bottom">
           <span ng-bind="$index + 1"></span>
           <div ng-bind="x.title"></div>
         </div>
@@ -26,22 +32,9 @@
       <i class="glyphicon glyphicon-triangle-right"></i>
     </button>
   </div>
-  <!-- <div data-glide-el="controls">
-      <button data-glide-dir="<<">Start</button>
-      <button data-glide-dir=">>">End</button>
-    </div> -->
 </div>
 
-<!-- <li class="slide-item glide__slide" ng-repeat="x in carouselCtrl.items">
-    <img ng-src="{{carouselCtrl.image($index)}}" class="slide-bg" />
-    <div class="slide-bottom-info">
-      <div ng-bind="x.title"></div>
-    </div>
-  </li> -->
+<script type="text/ng-template" id="slide-item.html">
 
-<!-- <div class="slide-item glide__slide" ng-repeat="x in carouselCtrl.items">
-  <img data-lazy="{{carouselCtrl.image($index)}}" class="slide-bg" />
-  <div class="slide-bottom-info">
-    <div ng-bind="x.title"></div>
-  </div>
-</div> -->
+
+</script>

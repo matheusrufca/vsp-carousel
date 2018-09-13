@@ -2,7 +2,7 @@
   <div glide settings="carouselCtrl.sliderSettings" slide-data="carouselCtrl.items">
   </div>
 </div>
-<pre class="raw" ng-bind="carouselCtrl | json"></pre>
+<!-- <pre class="raw" ng-bind="carouselCtrl | json"></pre> -->
 
 
 
@@ -16,7 +16,7 @@
   <div slick settings="carouselCtrl.sliderSettings" class="slide-row">
     <div class="slide-item" ng-repeat="x in carouselCtrl.items">
       <img data-lazy="{{carouselCtrl.image($index)}}" class="slide-bg"/>
-      <div class="slide-bottom-info">
+      <div class="slide-info--bottom">
         <div ng-bind="x.title"></div>
       </div>
     </div>
