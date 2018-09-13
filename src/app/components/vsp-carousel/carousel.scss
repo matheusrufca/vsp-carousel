@@ -1,0 +1,169 @@
+@import "compass-mixins";
+
+$img-width: 255px;
+$img-height: 155px;
+$slider-gutter: 10px;
+$slider-padding: 130px;
+$grow-height: 250px;
+
+.vsp-carousel {
+  // padding: 0 30px;
+  // background-color: black;
+  min-height: 100px;
+  width: 100%;
+  display: block;
+  position: relative;
+
+  .vsp-slider {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: calc(#{$grow-height} + 2px);
+  }
+
+  .vsp-slider__title {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    text-align: left;
+    z-index: 1;
+    padding: 0 30px;
+  }
+
+  .slide-row {
+    display: flex;
+    align-items: center;
+
+    .slide-item {
+      position: relative;
+      height: auto;
+      border: 1px solid black;
+      transition: all .3s ease-in-out;
+      // min-height: $img-heigh;
+
+      .slide-bg {
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+
+      .slide-bg--small,
+      .slide-bg--large {
+        width: 100%;
+        @extend .slide-bg;
+      }
+
+      .slide-bg--large {
+        display: none;
+        visibility: hidden;
+      }
+
+      .slide-bottom-info {
+        position: absolute;
+        display: none;
+        bottom: 0;
+        left: 0;
+        right: 0;
+
+        background-color: transparentize($color: #000000, $amount: 0.5);
+        color: white;
+        visibility: hidden;
+      }
+
+      &:hover {
+        @extend .grow;
+      }
+
+    }
+
+
+    .slide-item.grow {
+      width: 400px !important;
+      // height: $grow-height;
+
+      .slide-bg--small {
+        display: none;
+        visibility: hidden;
+      }
+
+      .slide-bg--large {
+        display: initial;
+        visibility: initial;
+      }
+
+      .slide-bottom-info {
+        display: initial;
+        visibility: initial;
+      }
+    }
+  }
+}
+
+
+.glide__arrows.controls-container--left,
+.glide__arrows.controls-container--right {
+  width: 130px;
+  position: absolute;
+  top: 0;
+  height: 100%;
+}
+
+
+.glide__arrows.controls-container--left {
+  left: 0;
+  @extend .gradient-side--left;
+}
+
+.glide__arrows.controls-container--right {
+  right: 0;
+  @extend .gradient-side--right;
+}
+
+
+
+pre.raw {
+  padding: 30px;
+  text-align: left;
+  padding: 30px;
+  text-align: left;
+  overflow: auto;
+  max-height: 200px;
+
+
+  &.expanded {
+    max-height: unset;
+  }
+}
+
+
+.slick-slide {
+  min-width: 230px;
+  height: $img-height;
+  position: relative;
+
+  >div {
+    height: 100%;
+  }
+}
+
+ul {
+  margin-bottom: 0;
+}
+
+
+.gradient-side--left {
+  // Needs latest Compass, add '@import "compass"' to your scss
+  // Permalink - use to edit and share this gradient:
+  // http://colorzilla.com/gradient-editor/#000000+0,000000+100&1+0,0+100
+  // @include filter-gradient(#000000, #00000000, horizontal); // IE6-9
+  @include background-image(linear-gradient(left, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%));
+}
+
+.gradient-side--right {
+  // Needs latest Compass, add '@import "compass"' to your scss
+  // Permalink - use to edit and share this gradient:
+  // http://colorzilla.com/gradient-editor/#000000+0,000000+100&0+0,1+100
+  // @include filter-gradient(#00000000, #000000, horizontal); // IE6-9
+  @include background-image(linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%));
+}

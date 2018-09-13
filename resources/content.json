@@ -1,0 +1,123 @@
+{
+  "data": [{
+    "id": 1,
+    "title": "The Elephant Man",
+    "year": "2018-07-26",
+    "genre": "Drama",
+    "summary": "Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.\n\nMaecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat."
+  }, {
+    "id": 2,
+    "title": "Cuckoo, The (Kukushka)",
+    "year": "2018-02-11",
+    "genre": "Comedy|Drama|War",
+    "summary": "Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat."
+  }, {
+    "id": 3,
+    "title": "Memory of a Killer, The (Zaak Alzheimer, De)",
+    "year": "2018-09-10",
+    "genre": "Action|Crime|Drama|Thriller",
+    "summary": "Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh."
+  }, {
+    "id": 4,
+    "title": "Oh, Susanna!",
+    "year": "2018-07-01",
+    "genre": "Romance|Western",
+    "summary": "Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.\n\nMorbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis."
+  }, {
+    "id": 5,
+    "title": "Wind Chill",
+    "year": "2017-09-12",
+    "genre": "Drama|Horror|Thriller",
+    "summary": "Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.\n\nMauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero."
+  }, {
+    "id": 6,
+    "title": "Johnny Handsome",
+    "year": "2018-02-04",
+    "genre": "Crime|Drama",
+    "summary": "Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero."
+  }, {
+    "id": 7,
+    "title": "Young Goethe in Love",
+    "year": "2018-04-26",
+    "genre": "Drama|Romance",
+    "summary": "Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.\n\nPellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus."
+  }, {
+    "id": 8,
+    "title": "Creator",
+    "year": "2018-02-02",
+    "genre": "Comedy|Drama|Romance",
+    "summary": "In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo."
+  }, {
+    "id": 9,
+    "title": "Lunacy (Sílení)",
+    "year": "2018-09-03",
+    "genre": "Animation|Horror",
+    "summary": "Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.\n\nInteger ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi."
+  }, {
+    "id": 10,
+    "title": "Crocodile Dundee",
+    "year": "2017-10-24",
+    "genre": "Adventure|Comedy",
+    "summary": "Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit."
+  }, {
+    "id": 11,
+    "title": "Queen: Days of Our Lives",
+    "year": "2017-11-02",
+    "genre": "Documentary",
+    "summary": "In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis."
+  }, {
+    "id": 12,
+    "title": "Annabelle",
+    "year": "2017-11-14",
+    "genre": "Horror",
+    "summary": "Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.\n\nProin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl."
+  }, {
+    "id": 13,
+    "title": "Life After Tomorrow",
+    "year": "2018-08-17",
+    "genre": "Documentary",
+    "summary": "In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo."
+  }, {
+    "id": 14,
+    "title": "Crimson Rivers 2: Angels of the Apocalypse (Rivières pourpres II - Les anges de l'apocalypse, Les)",
+    "year": "2018-05-02",
+    "genre": "Action|Crime|Thriller",
+    "summary": "Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.\n\nIn congue. Etiam justo. Etiam pretium iaculis justo."
+  }, {
+    "id": 15,
+    "title": "Front Line, The (Go-ji-jeon)",
+    "year": "2018-08-20",
+    "genre": "Drama|War",
+    "summary": "Phasellus in felis. Donec semper sapien a libero. Nam dui.\n\nProin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius."
+  }, {
+    "id": 16,
+    "title": "Stuart Little",
+    "year": "2018-08-28",
+    "genre": "Children|Comedy|Fantasy",
+    "summary": "Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.\n\nIn congue. Etiam justo. Etiam pretium iaculis justo."
+  }, {
+    "id": 17,
+    "title": "Exit to Hell",
+    "year": "2018-02-14",
+    "genre": "Action|Horror|Thriller",
+    "summary": "Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti."
+  }, {
+    "id": 18,
+    "title": "Robots",
+    "year": "2018-07-12",
+    "genre": "Adventure|Animation|Children|Comedy|Fantasy|Sci-Fi|IMAX",
+    "summary": "Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti."
+  }, {
+    "id": 19,
+    "title": "Snoopy Come Home",
+    "year": "2017-12-13",
+    "genre": "Animation|Children|Comedy|Musical",
+    "summary": "Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.\n\nPhasellus in felis. Donec semper sapien a libero. Nam dui."
+  }, {
+    "id": 20,
+    "title": "Roadie",
+    "year": "2018-03-12",
+    "genre": "Comedy|Musical",
+    "summary": "Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris."
+  }]
+}

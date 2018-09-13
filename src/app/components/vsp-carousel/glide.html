@@ -1,0 +1,47 @@
+<div class="glide vsp-slider">
+  <div class="vsp-slider__title">
+    <h2>Categoria</h2>
+  </div>
+
+  <div class="glide__track" data-glide-el="track">
+    <ul class="glide__slides slide-row">
+      <li class="slide-item glide__slide" ng-repeat="x in slideData">
+        <img ng-src="{{x.thumbUrl}}" class="slide-bg--small" />
+        <img ng-src="{{x.imageUrl}}" class="slide-bg--large" />
+        <div class="slide-bottom-info">
+          <span ng-bind="$index + 1"></span>
+          <div ng-bind="x.title"></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="glide__arrows controls-container--left" data-glide-el="controls">
+    <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
+      <i class="glyphicon glyphicon-triangle-left"></i>
+    </button>
+  </div>
+
+  <div class="glide__arrows controls-container--right" data-glide-el="controls">
+    <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
+      <i class="glyphicon glyphicon-triangle-right"></i>
+    </button>
+  </div>
+  <!-- <div data-glide-el="controls">
+      <button data-glide-dir="<<">Start</button>
+      <button data-glide-dir=">>">End</button>
+    </div> -->
+</div>
+
+<!-- <li class="slide-item glide__slide" ng-repeat="x in carouselCtrl.items">
+    <img ng-src="{{carouselCtrl.image($index)}}" class="slide-bg" />
+    <div class="slide-bottom-info">
+      <div ng-bind="x.title"></div>
+    </div>
+  </li> -->
+
+<!-- <div class="slide-item glide__slide" ng-repeat="x in carouselCtrl.items">
+  <img data-lazy="{{carouselCtrl.image($index)}}" class="slide-bg" />
+  <div class="slide-bottom-info">
+    <div ng-bind="x.title"></div>
+  </div>
+</div> -->
