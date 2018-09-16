@@ -70,7 +70,7 @@ let glideDirective = ($timeout) => {
     link: (scope, element, attrs, controller) => {
 
       let loadComponent = () => {
-        $timeout(() => {
+        return $timeout(() => {
           mountComponent('.glide', {
             type: 'carousel',
             perView: 5,
@@ -78,11 +78,32 @@ let glideDirective = ($timeout) => {
             gap: 10,
             peek: 130
           })
-        })
+        });
       }
 
       try {
-        loadComponent();
+        loadComponent().then(() => {
+          let hoverHandler = (event) => {
+            const $target = event.currentTarget;
+
+
+            console.debug('item:hover', event);
+
+            $target.toggleClass('grow', true);
+          }
+
+          let mouseLeaveHandler = (event) => {
+            const $target = event.currentTarget;
+
+            console.debug('item:mouseleave', event);
+
+            $target.toggleClass('grow', true);
+          }
+
+
+          element.find('li.slide-item').on(':hover', hoverHandler);
+          element.find('li.slide-item').on(':mouseleave', mouseLeaveHandler);
+        });
       } catch (err) {
         console.warn('glideDirective', err);
         controller.error = err;

@@ -87,7 +87,7 @@ $grow-height: 250px;
       }
 
       &:hover {
-        @extend .grow;
+        // @extend .grow;
       }
 
     }
@@ -142,34 +142,10 @@ $grow-height: 250px;
 
 
 
-pre.raw {
-  padding: 30px;
-  text-align: left;
-  padding: 30px;
-  text-align: left;
-  overflow: auto;
-  max-height: 200px;
 
 
-  &.expanded {
-    max-height: unset;
-  }
-}
 
 
-.slick-slide {
-  min-width: 230px;
-  height: $img-height;
-  position: relative;
-
-  >div {
-    height: 100%;
-  }
-}
-
-ul {
-  margin-bottom: 0;
-}
 
 
 .gradient-side--left {
@@ -186,4 +162,25 @@ ul {
   // http://colorzilla.com/gradient-editor/#000000+0,000000+100&0+0,1+100
   // @include filter-gradient(#00000000, #000000, horizontal); // IE6-9
   @include background-image(linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%));
+}
+
+
+
+ul {
+  margin-bottom: 0;
+}
+
+
+pre.raw {
+  padding: 30px;
+  text-align: left;
+  padding: 30px;
+  text-align: left;
+  overflow: auto;
+  max-height: 200px;
+
+
+  &.expanded {
+    max-height: unset;
+  }
 }
