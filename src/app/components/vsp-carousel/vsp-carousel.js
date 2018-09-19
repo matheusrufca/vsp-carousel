@@ -65,7 +65,8 @@ let glideDirective = ($timeout) => {
     scope: {
       settings: '<',
       totalItems: '<',
-      slideData: '<'
+      slideData: '<',
+      navActive: '<'
     },
     link: (scope, element, attrs, controller) => {
 
@@ -79,39 +80,58 @@ let glideDirective = ($timeout) => {
             peek: 130
           })
         });
-      }
-
-      try {
-        loadComponent().then(() => {
-          let hoverHandler = (event) => {
-            const $target = event.currentTarget;
+      };
 
 
-            console.debug('item:hover', event);
-
-            $target.toggleClass('grow', true);
-          }
-
-          let mouseLeaveHandler = (event) => {
-            const $target = event.currentTarget;
-
-            console.debug('item:mouseleave', event);
-
-            $target.toggleClass('grow', true);
-          }
+      const addEventListeners = () => {
 
 
-          element.find('li.slide-item').on(':hover', hoverHandler);
-          element.find('li.slide-item').on(':mouseleave', mouseLeaveHandler);
-        });
-      } catch (err) {
-        console.warn('glideDirective', err);
+        let hoverHandler = (event) => {
+          const $target = angular.element(event.currentTarget);
+
+
+          console.debug('item:hover', event);
+
+          $target.toggleClass('grow', true);
+        };
+
+        let mouseLeaveHandler = (event) => {
+          const $target = angular.element(event.currentTarget);
+
+          console.debug('item:mouseleave', event);
+
+          $target.toggleClass('grow', false);
+        };
+
+        let clickHandler = (event) => {
+          const $target = angular.element(event.currentTarget);
+
+
+          $target.toggleClass('nav-current', true);
+          scope.navActive = true;
+
+          console.debug('item:click', scope, $target)
+        };
+
+        element.find('li.slide-item').on('click', clickHandler);
+        element.find('li.slide-item').hover(hoverHandler, mouseLeaveHandler);
+
+      };
+
+      $timeout(() => {
+        loadComponent().then(addEventListeners);
+      }).catch(err => {
         controller.error = err;
-      }
+        console.warn('glideDirective', err);
+      });
 
       console.debug('glideDirective:link', scope, element, attrs, controller);
     },
-    controller: () => {}
+    controller: ($scope) => {
+      $scope.$on('item.details:closed', (event, args) => {
+        $scope.navActive = false;
+      });
+    }
   }
 };
 

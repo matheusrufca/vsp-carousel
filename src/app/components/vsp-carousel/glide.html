@@ -1,4 +1,4 @@
-<div class="glide vsp-slider">
+<div class="glide vsp-slider" ng-class="{'nav-active': navActive}">
   <div class="vsp-slider__title">
     <h2>Categoria</h2>
   </div>
@@ -10,14 +10,20 @@
         <img ng-src="{{x.imageUrl}}" class="slide-bg--large" />
 
 
-        <a class="slide-item__btn-play" href="#">
-          <i class="glyphicon glyphicon-play"></i>
-        </a>
 
-        <div class="slide-info--bottom">
-          <span ng-bind="$index + 1"></span>
-          <div ng-bind="x.title"></div>
+        <div class="slide-item__overlay">
+          <a class="slide-item__btn-play" href="#">
+            <i class="glyphicon glyphicon-play"></i>
+          </a>
+
+          <div class="slide-info--bottom">
+            <div></div>
+
+            <span ng-bind="$index + 1"></span>
+            <div ng-bind="x.title"></div>
+          </div>
         </div>
+
       </li>
     </ul>
   </div>
