@@ -22,6 +22,9 @@ import Glide, {
 
 
 import './carousel.scss';
+import {
+  isRegExp
+} from 'util';
 
 
 const content = Object.freeze(jsonContent);
@@ -69,7 +72,6 @@ let glideDirective = ($timeout) => {
       navActive: '<'
     },
     link: (scope, element, attrs, controller) => {
-
       let loadComponent = () => {
         return $timeout(() => {
           mountComponent('.glide', {
@@ -82,39 +84,49 @@ let glideDirective = ($timeout) => {
         });
       };
 
-
-      const addEventListeners = () => {
+      let addEventListeners = () => {
 
 
         let hoverHandler = (event) => {
+          if (scope.navActive) return;
+
           const $target = angular.element(event.currentTarget);
+          $target.toggleClass('grow', true);
 
 
           console.debug('item:hover', event);
-
-          $target.toggleClass('grow', true);
         };
 
         let mouseLeaveHandler = (event) => {
+          if (scope.navActive) return;
+
           const $target = angular.element(event.currentTarget);
+          $target.toggleClass('grow', false);
 
           console.debug('item:mouseleave', event);
-
-          $target.toggleClass('grow', false);
         };
 
         let clickHandler = (event) => {
-          const $target = angular.element(event.currentTarget);
+          const $target = angular.element(event.currentTarget),
+            $current = element.find('li.slide-item.nav-active');
+
+          if ($current.length) {
+            $current.removeClass('nav-active');
+          }
 
 
-          $target.toggleClass('nav-current', true);
+          $target.toggleClass('nav-active', true);
+          $target.toggleClass('grow', false);
+
           scope.navActive = true;
 
-          console.debug('item:click', scope, $target)
+          console.debug('item:click', scope, $target);
         };
 
         element.find('li.slide-item').on('click', clickHandler);
         element.find('li.slide-item').hover(hoverHandler, mouseLeaveHandler);
+
+
 
       };
 
@@ -125,12 +137,23 @@ let glideDirective = ($timeout) => {
         console.warn('glideDirective', err);
       });
 
+      scope.$watch('navActive', (newValue, oldValue) => {
+        if (newValue == oldValue) return;
+
+        if (newValue == false)
+          element.find('li.slide-item.nav-active').removeClass('nav-active', false);
+      });
+
       console.debug('glideDirective:link', scope, element, attrs, controller);
     },
     controller: ($scope) => {
       $scope.$on('item.details:closed', (event, args) => {
         $scope.navActive = false;
       });
+
+      $scope.exitNavigation = () => {
+        $scope.navActive = false;
+      }
     }
   }
 };

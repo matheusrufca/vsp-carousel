@@ -35,6 +35,10 @@ $grow-height: 250px;
     display: flex;
     align-items: center;
 
+    .slide-item.nav-active {
+      border: 1px solid red;
+    }
+
     .slide-item {
       position: relative;
       height: auto;
