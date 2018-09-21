@@ -5,13 +5,14 @@
 
   <div class="glide__track" data-glide-el="track">
     <ul class="glide__slides slide-row">
-      <li class="slide-item glide__slide" ng-repeat="x in slideData">
+      <li class="slide-item glide__slide" ng-repeat="x in slideData" ng-click="onClick($event)" ng-mouseover="onMouseOver($event)"
+          ng-mouseleave="onMouseLeave($event)">
         <img ng-src="{{x.thumbUrl}}" class="slide-bg--small" />
         <img ng-src="{{x.imageUrl}}" class="slide-bg--large" />
 
 
 
-        <div class="slide-item__overlay">
+        <div class="slide-item__overlay hidden">
           <a class="slide-item__btn-play" href="#">
             <i class="glyphicon glyphicon-play"></i>
           </a>
@@ -42,7 +43,7 @@
 
 
 <div>
-<button ng-click="exitNavigation()">Sair navegação</button>
+  <button ng-click="exitNavigation()">Sair navegação</button>
 </div>
 <script type="text/ng-template" id="slide-item.html">
 

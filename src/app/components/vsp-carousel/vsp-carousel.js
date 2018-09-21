@@ -35,29 +35,21 @@ const ContentData = (content.data).map((item, i) => {
 
 // console.debug('Glide', Glide, Controls, Breakpoints);
 
-
-
 let glideDirective = ($timeout) => {
 
   let mountComponent = (selector, settings) => {
-    if (!angular.isString(selector)) throw 'Invalid Glide selector';
-    if (angular.isDefined(settings) && !angular.isObject(settings)) throw 'Invalid Glide settings';
+    const glide = new Glide(selector, settings);
 
-    let glide;
-    try {
-      glide = new Glide(selector, settings);
+    return $timeout(function () {
+      if (!angular.isString(selector)) throw 'Invalid Glide selector';
+      if (angular.isDefined(settings) && !angular.isObject(settings)) throw 'Invalid Glide settings';
 
-      $timeout(() => {
-        glide.mount();
-        console.debug('Glide', glide, settings);
-      })
-    } catch (err) {
-      console.warn('Glide:mountComponent', err);
+      glide.mount();
+      return glide;
+    }).catch(function (err) {
       throw err;
-    }
-    return glide;
-  }
-
+    });
+  };
 
 
 
@@ -73,78 +65,91 @@ let glideDirective = ($timeout) => {
     },
     link: (scope, element, attrs, controller) => {
       let loadComponent = () => {
-        return $timeout(() => {
-          mountComponent('.glide', {
-            type: 'carousel',
-            perView: 5,
-            focusAt: 0,
-            gap: 10,
-            peek: 130
-          })
-        });
+        mountComponent('.glide', {
+          type: 'carousel',
+          perView: 5,
+          focusAt: 0,
+          gap: 10,
+          peek: 130
+        }).catch(err => console.warn('Glide:mountComponent', err));
       };
 
-      let addEventListeners = () => {
-
-
-        let hoverHandler = (event) => {
-          if (scope.navActive) return;
-
-          const $target = angular.element(event.currentTarget);
-          $target.toggleClass('grow', true);
-
-
-          console.debug('item:hover', event);
-        };
-
-        let mouseLeaveHandler = (event) => {
-          if (scope.navActive) return;
-
-          const $target = angular.element(event.currentTarget);
-          $target.toggleClass('grow', false);
-
-          console.debug('item:mouseleave', event);
-        };
-
-        let clickHandler = (event) => {
-          const $target = angular.element(event.currentTarget),
-            $current = element.find('li.slide-item.nav-active');
-
-          if ($current.length) {
-            $current.removeClass('nav-active');
-          }
-
-
-          $target.toggleClass('nav-active', true);
-          $target.toggleClass('grow', false);
-
-          scope.navActive = true;
-
-          console.debug('item:click', scope, $target);
-        };
-
-        element.find('li.slide-item').on('click', clickHandler);
-        element.find('li.slide-item').hover(hoverHandler, mouseLeaveHandler);
-
-
-
-      };
-
-      $timeout(() => {
-        loadComponent().then(addEventListeners);
-      }).catch(err => {
-        controller.error = err;
-        console.warn('glideDirective', err);
+      angular.extend(scope, {
+        onClick: clickHandler,
+        onMouseOver: hoverHandler,
+        onMouseLeave: mouseLeaveHandler
       });
 
-      scope.$watch('navActive', (newValue, oldValue) => {
+
+      $timeout(loadComponent)
+        .catch(err => {
+          controller.error = err;
+          console.warn('glideDirective', err);
+        }, 1000);
+
+      scope.$watch('navActive', handleNavActiveChange);
+
+      console.debug('glideDirective:link', scope, element, attrs, controller);
+
+
+      function growSlide(slideElem, state) {
+        return $timeout(function () {
+          slideElem.classList.toggle('grow', state);
+          toggleOverlay(slideElem, state);
+
+          return slideElem;
+        });
+      }
+
+      function toggleOverlay(slideElem, state) {
+        return $timeout(function () {
+          let slideOverlayElem = slideElem.querySelector('.slide-item__overlay');
+          slideOverlayElem.classList.toggle('hidden', !state);
+          return slideOverlayElem;
+        }, 250);
+      }
+
+      function handleNavActiveChange(newValue, oldValue) {
         if (newValue == oldValue) return;
 
         if (newValue == false)
           element.find('li.slide-item.nav-active').removeClass('nav-active', false);
-      });
+      }
 
-      console.debug('glideDirective:link', scope, element, attrs, controller);
+      function hoverHandler($event) {
+        if (scope.navActive) return;
+        if ($event.currentTarget.classList.contains('glide__slide--clone')) return;
+
+        growSlide($event.currentTarget, true);
+        console.debug('item:hover', $event);
+      }
+
+      function mouseLeaveHandler($event) {
+        if (scope.navActive) return;
+        if ($event.currentTarget.classList.contains('glide__slide--clone')) return;
+
+        growSlide($event.currentTarget, false);
+        console.debug('item:mouseleave', $event);
+      }
+
+      function clickHandler($event) {
+        if ($event.currentTarget.classList.contains('glide__slide--clone')) return;
+
+        const targetElem = $event.currentTarget,
+          $current = element.find('li.slide-item.nav-active');
+
+        if ($current.length) {
+          $current.removeClass('nav-active');
+        }
+
+        scope.navActive = true;
+
+        growSlide($event.currentTarget, false).then(function (slideElem) {
+          slideElem.classList.toggle('nav-active', true);
+        });
+
+        console.debug('item:click', scope, targetElem);
+      }
     },
     controller: ($scope) => {
       $scope.$on('item.details:closed', (event, args) => {
