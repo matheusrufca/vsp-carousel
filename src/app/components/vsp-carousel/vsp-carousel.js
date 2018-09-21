@@ -38,19 +38,26 @@ const ContentData = (content.data).map((item, i) => {
 let glideDirective = ($timeout) => {
 
   let mountComponent = (selector, settings) => {
+
+    if (!angular.isString(selector)) throw 'Invalid Glide selector';
+    if (angular.isDefined(settings) && !angular.isObject(settings)) throw 'Invalid Glide settings';
+
     const glide = new Glide(selector, settings);
-
-    return $timeout(function () {
-      if (!angular.isString(selector)) throw 'Invalid Glide selector';
-      if (angular.isDefined(settings) && !angular.isObject(settings)) throw 'Invalid Glide settings';
-
-      glide.mount();
-      return glide;
-    }).catch(function (err) {
-      throw err;
-    });
+    glide.mount();
+    return glide;
   };
 
+  let loadComponent = (data) => {
+    return $timeout(function () {
+      mountComponent('.glide', {
+        type: 'carousel',
+        perView: 5,
+        focusAt: 0,
+        gap: 10,
+        peek: 130
+      });
+    });
+  };
 
 
   return {
@@ -64,15 +71,8 @@ let glideDirective = ($timeout) => {
       navActive: '<'
     },
     link: (scope, element, attrs, controller) => {
-      let loadComponent = () => {
-        mountComponent('.glide', {
-          type: 'carousel',
-          perView: 5,
-          focusAt: 0,
-          gap: 10,
-          peek: 130
-        }).catch(err => console.warn('Glide:mountComponent', err));
-      };
+
+      scope.$watch('navActive', handleNavActiveChange);
 
       angular.extend(scope, {
         onClick: clickHandler,
@@ -80,17 +80,30 @@ let glideDirective = ($timeout) => {
         onMouseLeave: mouseLeaveHandler
       });
 
+      init();
 
-      $timeout(loadComponent)
-        .catch(err => {
-          controller.error = err;
-          console.warn('glideDirective', err);
-        }, 1000);
 
-      scope.$watch('navActive', handleNavActiveChange);
+      function init() {
+        $timeout(loadComponent, 1000)
+          .catch(err => {
+            controller.error = err;
+            console.warn('glideDirective', err);
+          });
+      }
 
-      console.debug('glideDirective:link', scope, element, attrs, controller);
+      function setSlideActiveTimeout(slideElem, timeout) {
+        cancelSlideActivation();
 
+        scope._activationTimeout = $timeout(function () {
+          setSlideActive(slideElem);
+        }, timeout);
+      }
+
+      function cancelSlideActivation() {
+        if (angular.isUndefined(scope._activationTimeout)) return;
+
+        $timeout.cancel(scope._activationTimeout);
+      }
 
       function growSlide(slideElem, state) {
         return $timeout(function () {
@@ -117,39 +130,54 @@ let glideDirective = ($timeout) => {
       }
 
       function hoverHandler($event) {
-        if (scope.navActive) return;
-        if ($event.currentTarget.classList.contains('glide__slide--clone')) return;
+        const targetElem = $event.currentTarget;
 
-        growSlide($event.currentTarget, true);
+        if (targetElem.classList.contains('glide__slide--clone')) return;
+        if (scope.navActive && targetElem.classList.contains('nav-active')) return;
+
+
+        if (scope.navActive) {
+          setSlideActiveTimeout(targetElem, 3000);
+        } else {
+          growSlide(targetElem, true);
+        }
         console.debug('item:hover', $event);
       }
 
       function mouseLeaveHandler($event) {
-        if (scope.navActive) return;
         if ($event.currentTarget.classList.contains('glide__slide--clone')) return;
 
-        growSlide($event.currentTarget, false);
-        console.debug('item:mouseleave', $event);
+        if (scope.navActive) {
+          cancelSlideActivation();
+        } else {
+          growSlide($event.currentTarget, false);
+          console.debug('item:mouseleave', $event);
+        }
       }
 
       function clickHandler($event) {
-        if ($event.currentTarget.classList.contains('glide__slide--clone')) return;
+        const targetElem = $event.currentTarget;
 
-        const targetElem = $event.currentTarget,
-          $current = element.find('li.slide-item.nav-active');
+        if (targetElem.classList.contains('glide__slide--clone')) return;
+
+        scope.navActive = true;
+        setSlideActive(targetElem);
+        console.debug('item:click', scope, targetElem);
+      }
+
+      function setSlideActive(slideElem) {
+        const $current = element.find('li.slide-item.nav-active');
 
         if ($current.length) {
           $current.removeClass('nav-active');
         }
 
-        scope.navActive = true;
-
-        growSlide($event.currentTarget, false).then(function (slideElem) {
+        growSlide(slideElem, false).then(function (slideElem) {
           slideElem.classList.toggle('nav-active', true);
         });
-
-        console.debug('item:click', scope, targetElem);
       }
+
+      console.debug('glideDirective:link', scope, element, attrs, controller);
     },
     controller: ($scope) => {
       $scope.$on('item.details:closed', (event, args) => {
