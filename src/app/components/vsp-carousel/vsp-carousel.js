@@ -84,7 +84,7 @@ let glideDirective = ($timeout) => {
 
 
       function init() {
-        $timeout(loadComponent, 1000)
+        $timeout(loadComponent)
           .catch(err => {
             controller.error = err;
             console.warn('glideDirective', err);
@@ -200,17 +200,6 @@ let vspCarouselDirective = () => {
     controllerAs: 'carouselCtrl',
     scope: {
       totalItems: '<'
-    },
-    link: (scope, element, attrs, controller) => {
-
-      try {} catch (err) {
-        controller.error = err;
-      }
-
-
-
-
-      console.debug('vspCarouselDirective:link', scope, element, attrs, controller);
     }
   }
 }

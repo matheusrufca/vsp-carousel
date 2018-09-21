@@ -3,6 +3,9 @@
     <h2>Categoria</h2>
   </div>
 
+
+  <!-- SLIDER TRACK -->
+
   <div class="glide__track" data-glide-el="track">
     <ul class="glide__slides slide-row">
       <li class="slide-item glide__slide" ng-repeat="x in slideData" ng-click="onClick($event)" ng-mouseover="onMouseOver($event)"
@@ -28,18 +31,24 @@
       </li>
     </ul>
   </div>
+
+  <!-- SLIDER BUTTON LEFT -->
+
   <div class="glide__arrows controls-container--left" data-glide-el="controls">
     <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
       <i class="glyphicon glyphicon-triangle-left"></i>
     </button>
   </div>
 
+  <!-- SLIDER BUTTON RIGHT -->
   <div class="glide__arrows controls-container--right" data-glide-el="controls">
     <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
       <i class="glyphicon glyphicon-triangle-right"></i>
     </button>
   </div>
+
 </div>
+
 
 
 <div>
